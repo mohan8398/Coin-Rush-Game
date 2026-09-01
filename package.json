@@ -1,0 +1,35 @@
+{
+  "name": "realtime-collectibles-game",
+  "version": "1.0.0",
+  "description": "Real-time multiplayer collectibles game with authoritative server",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "build": "vite build",
+    "dev:server": "nodemon server/index.js",
+    "dev:client": "vite",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\""
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "dotenv": "^16.6.1",
+    "express": "^4.18.3",
+    "mysql2": "^3.24.2",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.8.3",
+    "uuid": "^9.0.1",
+    "vite": "^8.2.2"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5",
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Senior Engineer",
+  "license": "MIT"
+}
