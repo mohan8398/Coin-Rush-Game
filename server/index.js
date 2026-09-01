@@ -109,7 +109,7 @@ io.on('connection', (socket) => {
     try {
       room.sessionId = await db.logSessionStart(room.code, room.playerCount, config.COLLECTIBLE.COUNT);
     } catch (e) {
-      console.error('Socket DB session log failed:', e);
+      console.error(e);
     }
 
     const snapshot = room.toJSON();

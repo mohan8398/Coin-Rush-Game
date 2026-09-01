@@ -14,7 +14,6 @@ export class GameLoop {
   start() {
     if (this.interval) return;
     this.interval = setInterval(() => this.tick(), TICK_MS);
-    console.log(`[GameLoop] Started at ${TICK_RATE} Hz`);
   }
 
   stop() {
@@ -91,7 +90,7 @@ export class GameLoop {
       await db.saveGameScores(room.code, scores);
       if (room.sessionId) await db.logSessionEnd(room.sessionId);
     } catch (err) {
-      console.error('[GameLoop] DB error on game over:', err);
+      console.error(err);
     }
 
     const allTimeLeaderboard = await db.getAllTimeLeaderboard();
@@ -100,8 +99,6 @@ export class GameLoop {
       finalScores: scores,
       allTimeLeaderboard,
     });
-
-    console.log(`Game Room ${room.code} finished. Winner: ${scores[0]?.username}`);
 
     this.roomManager.scheduleCleanup(room.code);
   }

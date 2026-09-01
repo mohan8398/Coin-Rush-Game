@@ -32,7 +32,7 @@ export function spawnCollectibles(count = COLLECTIBLE.COUNT) {
   }
 
   if (collectibles.length < count) {
-    console.warn(`Only spawned ${collectibles.length}/${count} collectibles (world too small?)`);
+    console.warn(`Only spawned ${collectibles.length}/${count} collectibles`);
   }
 
   return collectibles;

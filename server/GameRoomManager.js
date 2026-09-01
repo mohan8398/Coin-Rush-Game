@@ -10,7 +10,6 @@ export class GameRoomManager {
     const code = this.generateUniqueCode();
     const room = new GameRoom(code, hostSocketId, hostUsername);
     this.rooms.set(code, room);
-    console.log(`Room Created ${code} (host: ${hostUsername})`);
     return room;
   }
 
@@ -28,7 +27,6 @@ export class GameRoomManager {
     const player = room.addPlayer(socketId, username);
     if (!player) return { error: 'Could not join room.' };
 
-    console.log(`Room ${username} joined room ${code} (${room.playerCount}/${ROOM.MAX_PLAYERS})`);
     return { room, player };
   }
 
@@ -44,7 +42,6 @@ export class GameRoomManager {
     if (!room) return null;
 
     room.removePlayer(socketId);
-    console.log(`Room Socket ${socketId} left room ${room.code}`);
 
     if (room.playerCount === 0) {
       this.scheduleCleanup(room.code, 0);
