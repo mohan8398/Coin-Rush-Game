@@ -1,4 +1,4 @@
-# CoinRush 🪙 — Real-Time Multiplayer Game
+# CoinRush — Real-Time Multiplayer Game
 
 A real-time multiplayer collectibles game built with **Node.js + Express + Socket.IO** and MySQL for leaderboard.
 
@@ -64,32 +64,9 @@ npm run dev
 
 ---
 
-## Key Backend Design Decisions
-
-### Game Model
-- Clients send **direction intent** (`dx`, `dy`) — never a position
-- The server runs a **20 Hz game loop** that moves players, detects collisions, and awards scores
-- A `Set`-based mutex in `GameRoom.tryCollect()` ensures exactly one player wins each coin, even under concurrent socket events
-
-### Anti-Double-Award Mechanism
-```js
-tryCollect(socketId, coinId) {
-  if (this.claimedCollectibles.has(coinId)) return null;
-}
-```
-
 ### Multiple Game Rooms
 - Rooms identified by unique 6-char codes 
 - Room states: `waiting → playing → finished`
-
-### DATABASE (Bonus ✓)
-- **MYSQL**
-- `GET /api/leaderboard` returns all-time top 10 by personal best score
-- Leaderboard shown on landing page and game-over screen
-
-### Client-Side
-- Canvas renders at **60 fps** with linear interpolation between 20 Hz server snapshots
-- Players appear perfectly smooth regardless of tick rate
 
 ---
 
@@ -103,3 +80,15 @@ tryCollect(socketId, coinId) {
 
 ---
 
+## Improvements implemented
+
+- Added a MySQL database to store all-time scores.
+- Each player's personal best score is tracked and displayed on the leaderboard.
+- Database connection is established when the server starts, and tables are created if they don't exist.
+- A REST API endpoint `/api/leaderboard` is available to fetch the top 10 players.
+- The leaderboard is displayed on the game-over screen and on the landing page.
+- The game now logs session data (room code, player count, total coins, start/end times) to the database.
+- Added connection pooling and proper resource management for the database.
+
+#### NOTE
+For Client UI Design, I have taken help from AI Tool.
